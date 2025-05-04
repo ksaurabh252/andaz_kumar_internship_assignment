@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+.doctor-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.consult-button {
+  transition: background-color 0.2s ease;
+}
+
+.consult-button:hover {
+  background-color: #2563eb;
+}
+
+.visit-button {
+  transition: background-color 0.2s ease;
+}
+
+.visit-button:hover {
+  background-color: #eff6ff;
+}
