@@ -1,21 +1,27 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   env: {
     MONGODB_URI: process.env.MONGODB_URI,
   },
-  api: {
-    bodyParser: {
-      sizeLimit: "1mb",
+
+  images: {
+    domains: ["i.pravatar.cc"],
+    minimumCacheTTL: 60,
+  },
+
+  serverRuntimeConfig: {
+    api: {
+      bodyParser: {
+        sizeLimit: "1mb",
+      },
     },
   },
-  // If you're using Next.js 13+
-  experimental: {
-    appDir: true,
-  },
+
+  reactStrictMode: true,
+
+  productionBrowserSourceMaps: false,
+  optimizeFonts: true,
+  compress: true,
 };
 
-export default nextConfig;
+module.exports = nextConfig;
