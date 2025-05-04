@@ -49,7 +49,7 @@ src
 │ │ │ └── route.ts # Doctor API handler
 │ │ ├── health/
 │ │ │ └── route.ts # Health check endpoint
-│ │ └── test/
+│ │ └
 │ │ └── route.ts # Test endpoint
 │ ├── components/
 │ │ ├── DoctorsPage.tsx # Main doctors listing component

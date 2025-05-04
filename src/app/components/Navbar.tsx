@@ -12,11 +12,13 @@ export default function Navbar() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    const params = new URLSearchParams();
+
     if (searchQuery.trim()) {
-      router.push(`/doctors?search=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      router.push("/doctors");
+      params.set("search", searchQuery.trim());
     }
+
+    router.push(`/doctors?${params.toString()}`);
   };
 
   useEffect(() => {

@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Image from "next/image";
+
 interface Doctor {
   _id: string;
   name: string;
