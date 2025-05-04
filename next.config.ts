@@ -6,21 +6,11 @@ const nextConfig = {
 
   images: {
     domains: ["i.pravatar.cc"],
-    minimumCacheTTL: 60,
   },
-
-  serverRuntimeConfig: {
-    api: {
-      bodyParser: {
-        sizeLimit: "1mb",
-      },
-    },
-  },
-
   reactStrictMode: true,
 
   productionBrowserSourceMaps: false,
-  optimizeFonts: true,
+
   compress: true,
 };
 
