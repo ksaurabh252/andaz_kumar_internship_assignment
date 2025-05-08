@@ -20,7 +20,7 @@ const nextConfig = {
   reactStrictMode: true,
 
   productionBrowserSourceMaps: false,
-  optimizeFonts: true,
+  // optimizeFonts: true,
   compress: true,
 };
 
