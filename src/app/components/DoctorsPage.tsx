@@ -2,7 +2,6 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Image from "next/image";
-
 interface Doctor {
   _id: string;
   name: string;
@@ -39,7 +38,7 @@ interface PaginationState {
   totalPages: number;
 }
 interface DoctorsPageProps {
-  searchParams?: { search?: string; page?: string };
+  searchParams?: Record<string, string | string[] | undefined>;
 }
 const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
   const hasInPerson = doctor.consultationMode?.includes("In-Person");
@@ -163,13 +162,15 @@ export default function DoctorsPage({ searchParams }: DoctorsPageProps) {
     total: 0,
     totalPages: 1,
   });
-
   const fetchDoctors = useCallback(async () => {
     setLoading(true);
     try {
       const queryParams = new URLSearchParams();
       if (searchParams?.search) {
-        queryParams.append("search", searchParams.search as string);
+        const search = Array.isArray(searchParams.search)
+          ? searchParams.search[0]
+          : searchParams.search;
+        if (search) queryParams.append("search", search);
       }
       if (filters.experience) {
         const [minExp, maxExp] = filters.experience.split("-");
@@ -185,8 +186,11 @@ export default function DoctorsPage({ searchParams }: DoctorsPageProps) {
       if (filters.location) queryParams.append("location", filters.location);
       if (filters.gender) queryParams.append("gender", filters.gender);
       if (filters.mode) queryParams.append("mode", filters.mode);
+
       queryParams.append("page", pagination.page.toString());
+
       const response = await axios.get(`/api/doctor?${queryParams.toString()}`);
+
       if (response.data && response.data.doctors) {
         setDoctors(response.data.doctors);
         setPagination({
@@ -209,15 +213,17 @@ export default function DoctorsPage({ searchParams }: DoctorsPageProps) {
   useEffect(() => {
     fetchDoctors();
   }, [fetchDoctors]);
-  useEffect(() => {
-    const handleRouteChange = () => {
-      fetchDoctors();
-    };
-    window.addEventListener("popstate", handleRouteChange);
-    return () => {
-      window.removeEventListener("popstate", handleRouteChange);
-    };
-  }, [fetchDoctors]);
+
+  // useEffect(() => {
+  //   const handleRouteChange = () => {
+  //     fetchDoctors();
+  //   };
+  //   window.addEventListener("popstate", handleRouteChange);
+  //   return () => {
+  //     window.removeEventListener("popstate", handleRouteChange);
+  //   };
+  // }, [fetchDoctors]);
+
   const handleFilterChange = (filterType: keyof FilterState, value: string) => {
     setFilters((prev) => ({ ...prev, [filterType]: value }));
     setPagination((prev) => ({ ...prev, page: 1 }));

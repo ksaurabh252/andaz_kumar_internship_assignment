@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import DoctorsPage from "./components/DoctorsPage";
-import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
   title: "General Physician | Apollo247 Clone",
@@ -21,19 +20,16 @@ export const metadata: Metadata = {
     }),
   },
 };
-
 interface PageProps {
-  searchParams?: {
-    search?: string;
-    page?: string;
-  };
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export default function Home({ searchParams }: PageProps) {
+export default async function Home({ searchParams }: PageProps) {
+  const searchParamsResolved = await searchParams;
+
   return (
     <>
-      <Navbar />
-      <DoctorsPage searchParams={searchParams} />
+      <DoctorsPage searchParams={searchParamsResolved} />{" "}
     </>
   );
 }

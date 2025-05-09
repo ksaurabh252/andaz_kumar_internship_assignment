@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { dbConnect } from "@/lib/dbConnect";
 import mongoose from "mongoose";
-import Doctor from "@/models/Doctor";
+import { dbConnect } from "src/lib/dbConnect";
+import Doctor from "src/models/Doctor";
 
 export async function GET() {
   try {

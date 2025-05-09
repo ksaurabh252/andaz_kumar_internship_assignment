@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
-import Doctor from "@/models/Doctor";
-import { dbConnect } from "@/lib/dbConnect";
-
+import Doctor from "src/models/Doctor";
+import { dbConnect } from "src/lib/dbConnect";
 interface FilterCriteria {
   location?: RegExp;
   gender?: string;
